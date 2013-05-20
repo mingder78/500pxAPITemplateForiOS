@@ -31,6 +31,11 @@
 {
     [super viewWillAppear:animated];
     self.dataLabel.text = [self.dataObject description];
+    NSURL *url = [NSURL URLWithString:[self.dataObject description]];
+    //URL Requst Object
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    //Load the request in the UIWebView.
+    [self.webView loadRequest:requestObj];
 }
 
 @end

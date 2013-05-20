@@ -9,6 +9,7 @@
 #import "ModelController.h"
 
 #import "DataViewController.h"
+#import "AppDelegate.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -30,8 +31,11 @@
     self = [super init];
     if (self) {
         // Create the data model.
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        _pageData = [[dateFormatter monthSymbols] copy];
+        
+        AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        _pageData = [NSArray arrayWithArray:app.itemsArray];
     }
     return self;
 }
@@ -45,7 +49,7 @@
     
     // Create a new view controller and pass suitable data.
     DataViewController *dataViewController = [storyboard instantiateViewControllerWithIdentifier:@"DataViewController"];
-    dataViewController.dataObject = self.pageData[index];
+        dataViewController.dataObject = self.pageData[index];
     return dataViewController;
 }
 

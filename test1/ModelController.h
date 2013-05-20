@@ -10,7 +10,8 @@
 
 @class DataViewController;
 
-@interface ModelController : NSObject <UIPageViewControllerDataSource>
+@interface ModelController : NSObject <UIPageViewControllerDataSource> 
+@property (nonatomic, strong) NSArray *items;
 
 - (DataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(DataViewController *)viewController;

@@ -13,12 +13,11 @@
  Go get your own key from 500px on http://500px.com/settings/applications?from=developers
  */
 
-#define kUserNameForAuthentication  @"__CHANGE_ME__"
-#define kPasswordForAuthentication  @"__CHANGE_ME__"
+#define kUserNameForAuthentication  @"username"
+#define kPasswordForAuthentication  @"password"
 
-#define kPXAPIConsumerKey       @"__CHANGE_ME__"
-#define kPXAPIConsumerSecret    @"__CHANGE_ME__"
-
+#define kPXAPIConsumerKey       @"wZHbWGA0R5MFkAGlc3eMfLeH8Jx7iuEuKzxZcECu"
+#define kPXAPIConsumerSecret    @"7UTN19sJ3k1XVrPTiTXaXTJJKH6qyshb3TyRhDu2"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -29,11 +28,20 @@
                                    consumerKey:kPXAPIConsumerKey
                                 consumerSecret:kPXAPIConsumerSecret];
     
-    NSDictionary *dictionary = [self jsonDictionaryForRequest:[helper urlRequestForSearchTerm:@"flickr"] expectingResponseCode:200];
+    NSDictionary *dictionary = [self jsonDictionaryForRequest:[helper urlRequestForSearchTerm:@"taipei"] expectingResponseCode:200];
 
 #ifdef DEBUG
-    NSLog(@"%s|%@",__PRETTY_FUNCTION__,dictionary);
+//    NSLog(@"%s|%@",__PRETTY_FUNCTION__,[dictionary objectForKey:@"photos"]);
 #endif
+    NSArray *items = [dictionary objectForKey:@"photos"];
+    self.itemsArray = [NSMutableArray new];
+    for (NSDictionary *item in items) {
+        
+#ifdef DEBUG
+//    NSLog(@"%s|%@",__PRETTY_FUNCTION__,[item objectForKey:@"image_url"][0]);
+#endif
+        [self.itemsArray addObject:[item objectForKey:@"image_url"][0]];
+    }
     return YES;
 }
 
